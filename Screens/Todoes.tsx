@@ -1,12 +1,20 @@
 import React, { ReactElement } from 'react';
-import { Text, View } from 'react-native';
+import { Text, ScrollView, StyleSheet } from 'react-native';
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		width: '100%',
+		flexDirection: 'column',
+		backgroundColor: '#fff'
+	}
+});
 
 const Todoes = (): ReactElement => {
 	return (
-		<View>
-			{console.log(process.env)}
+		<ScrollView contentContainerStyle={{alignItems: 'center'}} style={styles.container}>
 			<Text>Todoes</Text>
-		</View>
+		</ScrollView>
 	);
 };
 

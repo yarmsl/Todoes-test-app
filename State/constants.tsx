@@ -1,0 +1,1 @@
+export const API_KEY = 'http://mobile-dev.oblakogroup.ru/candidate/YaroslavMakarov/list';
