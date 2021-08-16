@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
 const MainLayout = ({ children }: Child) => {
 	return (
 		<SafeAreaProvider>
-			<SafeAreaView style={styles.wrapper} forceInset={{bottom: 'never'}}>
+			<SafeAreaView style={styles.wrapper}>
 					{children}
 			</SafeAreaView>
 		</SafeAreaProvider>
