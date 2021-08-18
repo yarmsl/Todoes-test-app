@@ -1,18 +1,18 @@
 import React, { ReactElement, useState, useEffect } from 'react';
 import { ScrollView, StyleSheet, View, Modal, TouchableWithoutFeedback } from 'react-native';
 import { useTheme, List, TextInput, IconButton } from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
+import { addTodoesList, removeTodoesList } from '../../lib/fetch';
+import { ListItemBottom, todoList } from '../../lib/types';
+import { addTodoesListStore, removeTodoesListStore } from '../../state/actions';
 import { useMainCtx } from '../../state/MainCtx';
 
-interface ListItem {
-	title: string;
-	n: number;
-}
-
 const BottomSheet = (): ReactElement => {
-	const data = ['redux', 'react', 'classtransformer', 'ios'];
+	const dispatch = useDispatch();
+	const selectTodos = (state: todoList[]) => state
+	const todoesList = useSelector(selectTodos);
 	const {openBottomSheet, setOpenBottomSheet} = useMainCtx();
 	const theme = useTheme();
-	console.log(theme);
 	const [text, setText] = useState('');
 	const [error, setError] = useState(false);
 
@@ -43,10 +43,11 @@ const BottomSheet = (): ReactElement => {
 		},
 		listitem: {
 			paddingHorizontal: 0,
+			paddingVertical: 0
 		}
 	});
 
-	const ListItem = ({ title, n }: ListItem) => {
+	const ListItem = ({ title, id }: ListItemBottom) => {
 		return (
 			<List.Item
 				style={styles.listitem}
@@ -54,18 +55,20 @@ const BottomSheet = (): ReactElement => {
 				right={() => <IconButton
 					icon='delete'
 					color={theme.colors.error}
-					onPress={() => console.log(`delete ${n}`)}
+					onPress={() => {dispatch(removeTodoesListStore(id)); removeTodoesList(id)}}
 				/>}
 			/>
 		)
 	}
 
 	const addCategory = () => {
-		console.log('add');
 		if (text.length < 1) {
 			setError(true);
 		} else {
+			dispatch(addTodoesListStore(text));
+			addTodoesList(text);
 			setError(false);
+			setText('');
 		}
 	}
 
@@ -82,9 +85,9 @@ const BottomSheet = (): ReactElement => {
 				</TouchableWithoutFeedback>
 				<View style={styles.bottomSheetBottom}>
 					<ScrollView style={styles.bottomSheetBottomSW}>
-						{data.map((item, i) => {
+						{todoesList.map((item, i) => {
 							return (
-								<ListItem key={i} title={item} n={i} />
+								<ListItem key={i} title={item.title} id={item.id} />
 							)
 						})}
 					</ScrollView>
@@ -109,6 +112,5 @@ const BottomSheet = (): ReactElement => {
 		</Modal>
 	)
 }
-
 
 export default BottomSheet;

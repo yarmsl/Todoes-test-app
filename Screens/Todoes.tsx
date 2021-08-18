@@ -5,14 +5,12 @@ import { FAB } from 'react-native-paper';
 import { TodoesScreenProp } from '../lib/types';
 import BottomSheet from '../src/UI/BottomSheet';
 import { useMainCtx } from '../state/MainCtx';
-import todoes from '../state/state.json';
 import CategoryItem from '../src/UI/CategoryItem';
-
-
+import { useStore } from 'react-redux';
 
 const Todoes = (): ReactElement => {
-console.log(todoes);
 	const nav = useNavigation<TodoesScreenProp>();
+	const todoesList = useStore();
 
 	return (
 		<>

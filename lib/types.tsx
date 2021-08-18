@@ -16,3 +16,31 @@ export interface MainCTX {
 }
 
 export type TodoesScreenProp = StackNavigationProp<RootStackParamList, 'Todoes'>;
+
+export interface Action {
+	type: string;
+	title: string;
+	id: number;
+}
+
+export interface todo {
+	checked: boolean;
+	created_at: string;
+	id: number;
+	list_id: number;
+	text: string;
+	updated_at: string;
+}
+
+export interface todoList {
+	candidate_id: number;
+	created_at: string;
+	id: number;
+	title: string;
+	todos: todo[];
+}
+
+export interface ListItemBottom {
+	title: string;
+	id: number;
+}

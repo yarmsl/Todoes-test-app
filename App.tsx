@@ -1,6 +1,9 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { Provider as StoreProvider } from 'react-redux';
+import { createStore } from 'redux';
+import { getTodoesList } from './lib/fetch';
+import { Action, todo, todoList } from './lib/types';
 import Screens from './Screens';
 import MainContext from './state/MainCtx';
 
@@ -9,20 +12,43 @@ const theme = {
 	dark: false,
 	colors: {
 		...DefaultTheme.colors,
-		background: '#fff'
+		background: '#fff',
+		primary: '#fff',
+		accent: '#2196f3'
 	}
 }
 
 const Main = () => {
-	return (
-		//  <StoreProvider store={store}>
-		<MainContext>
-			<PaperProvider theme={theme}>
-				<Screens />
-			</PaperProvider>
-		</MainContext>
+const [todoes, setTodoes] = useState([] as todoList[]);
 
-		//  </StoreProvider>
+useEffect(() => {
+	getTodoesList().then(r => setTodoes(r as todoList[]))
+},[])
+
+const todoesListReducer = (state = todoes, action: Action) => {
+	switch (action.type) {
+		case 'ADD_TODOESLIST':
+			return [
+				...state,
+				{ id: state[state.length - 1].id + 1, created_at: new Date().toISOString(), candidate_id: 65, title: action.title, todos: [] as todo[], updated_at: new Date().toISOString() }
+			];
+		case 'REMOVE_TODOESLIST':
+			return state.filter(list => list.id !== action.id)
+		default:
+			return state;
+	}
+};
+
+const store = createStore(todoesListReducer);
+
+	return (
+		<StoreProvider store={store}>
+			<MainContext>
+				<PaperProvider theme={theme}>
+					<Screens />
+				</PaperProvider>
+			</MainContext>
+		</StoreProvider>
 	);
 }
 
