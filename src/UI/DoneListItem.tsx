@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet } from 'react-native';
 import { List, useTheme } from 'react-native-paper';
+import { ListItemProps } from '../../lib/types';
+import { useDispatch } from 'react-redux';
+import { undoneTodo } from '../../state/actions';
+import { checkedTodo } from '../../lib/fetch';
 
-const DoneListItem = () => {
+const DoneListItem = ({title, id, list_id}: ListItemProps) => {
 	const theme = useTheme();
-	const [expanded, setExpanded] = useState(false);
-
+	const dispatch = useDispatch();
 	const styles = StyleSheet.create({
 		listItem: {
 			height: 50,
@@ -24,9 +27,10 @@ const DoneListItem = () => {
 	return (
 		<List.Item
 			left={() => <List.Icon icon='check' color={'green'} />}
-			title='задача 12312'
+			title={title}
 			titleStyle={styles.doneTitle}
 			style={styles.listItem}
+			onPress={() => {dispatch(undoneTodo(list_id, id)); checkedTodo(list_id, id, false)}}
 		/>
 	);
 };

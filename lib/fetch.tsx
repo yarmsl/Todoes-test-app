@@ -81,7 +81,12 @@ export const addTodo = (listID: number, todo: string) => {
 };
 
 export const editTodo = (listID: number, todoID: number, todo: string) => {
-	const data = PatchData(`${API_KEY}/${listID}/todo/${todoID}`, {text: todo, checked: true});
+	const data = PatchData(`${API_KEY}/${listID}/todo/${todoID}`, {text: todo});
+	return data;
+}
+
+export const checkedTodo = (listID: number, todoID: number, checked: boolean) => {
+	const data = PatchData(`${API_KEY}/${listID}/todo/${todoID}`, {checked: checked});
 	return data;
 }
 

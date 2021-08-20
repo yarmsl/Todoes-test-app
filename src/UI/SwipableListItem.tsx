@@ -2,8 +2,13 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button, ListItem, Divider } from 'react-native-elements';
 import { RadioButton, useTheme } from 'react-native-paper';
+import { ListItemProps } from '../../lib/types';
+import { useDispatch } from 'react-redux';
+import { doneTodo } from '../../state/actions';
+import { checkedTodo } from '../../lib/fetch';
 
-const SwipableListItem = () => {
+const SwipableListItem = ({title, id, list_id}: ListItemProps) => {
+	const dispatch = useDispatch();
 	const theme = useTheme();
 	const styles = StyleSheet.create({
 		side: {
@@ -30,7 +35,7 @@ const SwipableListItem = () => {
 	return (
 
 		<ListItem.Swipeable  
-			onPress={() => console.log('done!')}
+			onPress={() => { dispatch(doneTodo(list_id, id)); checkedTodo(list_id, id, true);}}
 			containerStyle={styles.listItemSwipable}
 			leftContent={
 				<View style={styles.side}>
@@ -54,7 +59,7 @@ const SwipableListItem = () => {
 		>
 			<RadioButton value='1' />
 			<ListItem.Content>
-				<ListItem.Title>Задача</ListItem.Title>
+				<ListItem.Title>{title}</ListItem.Title>
 			</ListItem.Content>
 		</ListItem.Swipeable>
 

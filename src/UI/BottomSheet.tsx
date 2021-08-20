@@ -1,9 +1,9 @@
-import React, { ReactElement, useState, useEffect } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { ScrollView, StyleSheet, View, Modal, TouchableWithoutFeedback } from 'react-native';
 import { useTheme, List, TextInput, IconButton } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTodoesList, removeTodoesList } from '../../lib/fetch';
-import { ListItemBottom, todoList } from '../../lib/types';
+import { ListItemProps, todoList } from '../../lib/types';
 import { addTodoesListStore, removeTodoesListStore } from '../../state/actions';
 import { useMainCtx } from '../../state/MainCtx';
 
@@ -47,7 +47,7 @@ const BottomSheet = (): ReactElement => {
 		}
 	});
 
-	const ListItem = ({ title, id }: ListItemBottom) => {
+	const ListItem = ({ title, id }: ListItemProps) => {
 		return (
 			<List.Item
 				style={styles.listitem}
@@ -85,7 +85,7 @@ const BottomSheet = (): ReactElement => {
 				</TouchableWithoutFeedback>
 				<View style={styles.bottomSheetBottom}>
 					<ScrollView style={styles.bottomSheetBottomSW}>
-						{todoesList.map((item, i) => {
+						{todoesList.length > 0 && todoesList.map((item, i) => {
 							return (
 								<ListItem key={i} title={item.title} id={item.id} />
 							)

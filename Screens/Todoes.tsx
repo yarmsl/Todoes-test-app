@@ -4,13 +4,10 @@ import { Text, ScrollView, StyleSheet } from 'react-native';
 import { FAB } from 'react-native-paper';
 import { TodoesScreenProp } from '../lib/types';
 import BottomSheet from '../src/UI/BottomSheet';
-import { useMainCtx } from '../state/MainCtx';
 import CategoryItem from '../src/UI/CategoryItem';
-import { useStore } from 'react-redux';
 
 const Todoes = (): ReactElement => {
 	const nav = useNavigation<TodoesScreenProp>();
-	const todoesList = useStore();
 
 	return (
 		<>

@@ -21,6 +21,7 @@ export interface Action {
 	type: string;
 	title: string;
 	id: number;
+	list_id: number;
 }
 
 export interface todo {
@@ -40,7 +41,12 @@ export interface todoList {
 	todos: todo[];
 }
 
-export interface ListItemBottom {
+export interface ListItemProps {
 	title: string;
 	id: number;
+	list_id?: number;
+}
+
+export interface AccordionItemProps {
+	todos: todo[];
 }
