@@ -57,7 +57,7 @@ export const PutData = async <T,>(url: string, obj: Record<string, unknown>): Pr
 };
 
 export const getTodoesList = async() => {
-	return await GetData(`${API_KEY}`)
+	return await GetData(`${API_KEY}`).then(r => r as todoList[])
 };
 
 export const addTodoesList = (title: string) => {
@@ -76,7 +76,7 @@ export const editTodoList = (id: number, title: string) => {
 };
 
 export const addTodo = (listID: number, todo: string) => {
-	const data = PostData(`${API_KEY}/${listID}/todo`, {text: todo, checked: true});
+	const data = PostData(`${API_KEY}/${listID}/todo`, {text: todo});
 	return data;
 };
 

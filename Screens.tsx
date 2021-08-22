@@ -20,7 +20,7 @@ const Screens = () => {
 					screenOptions={{
 						headerMode: 'float',
 						cardStyleInterpolator: Platform.OS === 'ios' ? CardStyleInterpolators.forHorizontalIOS : CardStyleInterpolators.forScaleFromCenterAndroid,
-						cardStyle: { backgroundColor: 'transparent' },
+						cardStyle: { backgroundColor: '#fff' },
 						header: () => <Header/>
 					}}
 				>

@@ -1,3 +1,9 @@
 export const API_KEY = 'http://mobile-dev.oblakogroup.ru/candidate/YaroslavMakarov/list';
-export const ADD_TODOLIST = 'ADD_TODOLIST';
-export const REMOVE_TODOLIST = 'REMOVE_TODOLIST';
+export const UPLOAD_TODOESLIST = 'UPLOAD_TODOESLIST';
+export const ADD_TODOESLIST = 'ADD_TODOESLIST';
+export const REMOVE_TODOESLIST = 'REMOVE_TODOESLIST';
+export const DONE_TODO = 'DONE_TODO';
+export const UNDONE_TODO = 'UNDONE_TODO';
+export const ADD_TODO = 'ADD_TODO';
+export const EDIT_TODO = 'EDIT_TODO';
+export const DELETE_TODO = 'DELETE_TODO';

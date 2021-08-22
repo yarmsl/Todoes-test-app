@@ -13,16 +13,19 @@ export type RootStackParamList = {
 export interface MainCTX {
 	openBottomSheet: boolean;
 	setOpenBottomSheet: Dispatch<SetStateAction<boolean>>;
+	todoTitle: string;
+	setTodoTitle: Dispatch<SetStateAction<string>>;
+	todoChecked: number;
+	setTodoChecked: Dispatch<SetStateAction<number>>;
+	editTodo: number;
+	setEditTodo: Dispatch<SetStateAction<number>>;
+	initListId: number;
+	setInitListId: Dispatch<SetStateAction<number>>;
+	editTodoError: boolean;
+	setEditTodoError: Dispatch<SetStateAction<boolean>>;
 }
 
 export type TodoesScreenProp = StackNavigationProp<RootStackParamList, 'Todoes'>;
-
-export interface Action {
-	type: string;
-	title: string;
-	id: number;
-	list_id: number;
-}
 
 export interface todo {
 	checked: boolean;
@@ -41,6 +44,17 @@ export interface todoList {
 	todos: todo[];
 }
 
+export interface Action {
+	type: string;
+	title?: string;
+	id?: number;
+	list_id?: number;
+	data?: Promise<todoList[]>;
+	fetchTodoes?: (dispatch: any) => Promise<void>;
+	todoesList: Promise<todoList>;
+	todo: Promise<todo>;
+}
+
 export interface ListItemProps {
 	title: string;
 	id: number;
@@ -49,4 +63,8 @@ export interface ListItemProps {
 
 export interface AccordionItemProps {
 	todos: todo[];
+}
+export interface AddTodoListitemProps {
+	title: string,
+	list_id: number
 }

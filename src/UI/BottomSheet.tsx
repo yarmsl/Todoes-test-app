@@ -1,8 +1,8 @@
 import React, { ReactElement, useState } from 'react';
 import { ScrollView, StyleSheet, View, Modal, TouchableWithoutFeedback } from 'react-native';
-import { useTheme, List, TextInput, IconButton } from 'react-native-paper';
+import { Button } from 'react-native-elements';
+import { useTheme, List, TextInput } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTodoesList, removeTodoesList } from '../../lib/fetch';
 import { ListItemProps, todoList } from '../../lib/types';
 import { addTodoesListStore, removeTodoesListStore } from '../../state/actions';
 import { useMainCtx } from '../../state/MainCtx';
@@ -44,6 +44,9 @@ const BottomSheet = (): ReactElement => {
 		listitem: {
 			paddingHorizontal: 0,
 			paddingVertical: 0
+		},
+		button: {
+			backgroundColor: theme.colors.background
 		}
 	});
 
@@ -52,10 +55,10 @@ const BottomSheet = (): ReactElement => {
 			<List.Item
 				style={styles.listitem}
 				title={title}
-				right={() => <IconButton
-					icon='delete'
-					color={theme.colors.error}
-					onPress={() => {dispatch(removeTodoesListStore(id)); removeTodoesList(id)}}
+				right={() => <Button
+					icon={{ name: 'trash-2', type: 'feather', color: theme.colors.error }}
+					buttonStyle={styles.button}
+					onPress={() => dispatch(removeTodoesListStore(id))}
 				/>}
 			/>
 		)
@@ -66,7 +69,6 @@ const BottomSheet = (): ReactElement => {
 			setError(true);
 		} else {
 			dispatch(addTodoesListStore(text));
-			addTodoesList(text);
 			setError(false);
 			setText('');
 		}
@@ -100,7 +102,6 @@ const BottomSheet = (): ReactElement => {
 							/>}
 							value={text}
 							underlineColor={theme.colors.background}
-							underlineColorAndroid={theme.colors.background}
 							onChangeText={setText}
 							placeholder='Новая категория'
 							error={error}

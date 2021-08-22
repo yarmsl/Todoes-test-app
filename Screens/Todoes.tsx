@@ -1,6 +1,6 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { Text, ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 import { FAB } from 'react-native-paper';
 import { TodoesScreenProp } from '../lib/types';
 import BottomSheet from '../src/UI/BottomSheet';
@@ -11,7 +11,7 @@ const Todoes = (): ReactElement => {
 
 	return (
 		<>
-			<ScrollView contentContainerStyle={{ alignItems: 'center' }} style={styles.container}>
+			<ScrollView contentContainerStyle={styles.container} style={styles.root}>
 				<CategoryItem/>
 			</ScrollView>
 			<FAB
@@ -25,13 +25,15 @@ const Todoes = (): ReactElement => {
 };
 
 const styles = StyleSheet.create({
-	container: {
+	root: {
 		flex: 1,
 		width: '100%',
 		minHeight: '100%',
 		flexDirection: 'column',
 		backgroundColor: '#fff',
-
+	},
+	container: {
+		paddingBottom: 100
 	},
 	fab: {
 		position: 'absolute',

@@ -1,13 +1,12 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { List } from 'react-native-paper';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { todoList } from '../../lib/types';
 import ListAccordionItem from './ListAccordionItem';
 import SwipableListItem from './SwipableListItem';
 
 const CategoryItem = () => {
-	const dispatch = useDispatch();
 	const selectTodos = (state: todoList[]) => state
 	const todoesList = useSelector(selectTodos);
 	const styles = StyleSheet.create({
