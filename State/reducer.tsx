@@ -40,10 +40,14 @@ const todoesListReducer = (state = initialState, action: Action) => {
 				if (list.id === action.list_id) {
 					return {
 						...list,
-						todos: [
-							...list.todos,
-							action.todo
-						]
+						todos:
+							list.todos.length === 0 ?
+								[
+									action.todo
+								] : [
+									...list.todos,
+									action.todo
+								]
 					}
 				} else {
 					return list
