@@ -25,12 +25,13 @@ const SwipableListItem = ({ title, id, list_id }: ListItemProps) => {
 
 	const styles = StyleSheet.create({
 		side: {
-
 			display: 'flex',
 			flexDirection: 'row',
-			backgroundColor: theme.colors.background
+			
 		},
 		sideButton: {
+			maxWidth: 65,
+			width: 65,
 			minHeight: '100%',
 			backgroundColor: theme.colors.background
 		},
@@ -40,10 +41,12 @@ const SwipableListItem = ({ title, id, list_id }: ListItemProps) => {
 		listItemSwipable: {
 			height: 52,
 			maxHeight: 52,
-			backgroundColor: theme.colors.background,
-			width: '100%',
 			justifyContent: 'center'
 		},
+		listItem: {
+			width: '100%',
+			backgroundColor: theme.colors.background,
+		}
 	});
 
 	return (
@@ -54,8 +57,9 @@ const SwipableListItem = ({ title, id, list_id }: ListItemProps) => {
 			renderLeftActions={
 				(dragX) => {
 					const trans = dragX.interpolate({
-						inputRange: [0, 50, 100, 101],
-						outputRange: [0, 0, 0, 1],
+						inputRange: [0, 1],
+						outputRange: [-65, 0],
+						extrapolate: 'extend'
 					});
 					return (
 						<Animated.View style={[styles.side, { transform: [{ translateX: trans }] }]}>
@@ -72,8 +76,8 @@ const SwipableListItem = ({ title, id, list_id }: ListItemProps) => {
 			renderRightActions={
 				(dragX) => {
 					const trans = dragX.interpolate({
-						inputRange: [0, 50, 100, 101],
-						outputRange: [0, 0, 0, 1],
+						inputRange: [0, 1],
+						outputRange: [65, 0],
 					});
 					return (
 						<Animated.View style={[styles.side, { transform: [{ translateX: trans }] }]}>
@@ -89,6 +93,7 @@ const SwipableListItem = ({ title, id, list_id }: ListItemProps) => {
 			}
 		>
 			<List.Item
+				style={styles.listItem}
 				onPress={() => dispatch(doneTodo(list_id, id))}
 				title={title}
 				left={() => <List.Icon

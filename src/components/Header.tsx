@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import { Appbar } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -21,6 +21,10 @@ const Header = (): ReactElement => {
 		setEditTodo(0);
 		setEditTodoError(false);
 	}
+
+	useEffect(() => {
+		nav.addListener('beforeRemove', reset);
+	})
 
 	const addTodoItem = () => {
 		if (todoTitle.length > 0 && todoChecked !== 0) {
