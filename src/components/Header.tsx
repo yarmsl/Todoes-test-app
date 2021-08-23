@@ -2,18 +2,16 @@ import React, { ReactElement, useEffect } from 'react';
 import { Appbar } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { TodoesScreenProp, todoList } from '../../lib/types';
+import { TodoesScreenProp } from '../../lib/types';
 import { useMainCtx } from '../../state/MainCtx';
 import { addTodoStore, deleteTodo, editTodoStore } from '../../state/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Header = (): ReactElement => {
 
-	const selectTodos = (state: todoList[]) => state
-	const todoesList = useSelector(selectTodos);
 	const nav = useNavigation<TodoesScreenProp>();
 	const dispatch = useDispatch();
-	const {setOpenBottomSheet, todoTitle, todoChecked, editTodo, setEditTodo, setTodoChecked, setTodoTitle, initListId, editTodoError, setEditTodoError} = useMainCtx();
+	const {setOpenBottomSheet, todoTitle, todoChecked, editTodo, setEditTodo, setTodoChecked, setTodoTitle, initListId, setEditTodoError} = useMainCtx();
 
 	const reset = () => {
 		setTodoTitle('');
@@ -38,7 +36,7 @@ const Header = (): ReactElement => {
 	
 	const editTodoItem = () => {
 		if (todoTitle.length > 0 && todoChecked !== 0) {
-			if (todoesList.filter(todoList => todoList.id === todoChecked)[0].todos.map(todo => todo.id === editTodo ? true : false).includes(true)) {
+			if (initListId === todoChecked) {
 				dispatch(editTodoStore(todoChecked, editTodo, todoTitle));
 			} else {
 				dispatch(deleteTodo(initListId, editTodo));

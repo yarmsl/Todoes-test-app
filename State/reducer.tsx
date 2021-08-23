@@ -7,7 +7,9 @@ const todoesListReducer = (state = initialState, action: Action) => {
 		case UPLOAD_TODOESLIST:
 			return action.data;
 		case ADD_TODOESLIST:
-			return [
+			return state === undefined ? [
+				action.todoesList
+			] : [
 				...state,
 				action.todoesList
 			];
@@ -41,7 +43,7 @@ const todoesListReducer = (state = initialState, action: Action) => {
 					return {
 						...list,
 						todos:
-							list.todos.length === 0 ?
+							list.todos === undefined ?
 								[
 									action.todo
 								] : [

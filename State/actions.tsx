@@ -9,6 +9,7 @@ export const fetchTodoes = async(dispatch) => {
 export const addTodoesListStore = (title: string) => {
 	const saveTodoesList = async(dispatch) => {
 		const data = await addTodoesList(title)
+		console.log('response New List ',data)
 		dispatch({type: ADD_TODOESLIST, todoesList: data})
 	}
 	return saveTodoesList;
@@ -52,6 +53,7 @@ export const deleteTodo = (list_id: number, todo_id: number) => {
 export const addTodoStore = (list_id: number, title: string) => {
 	const saveTodo = async(dispatch) => {
 		const data = await addTodo(list_id, title)
+		console.log('response New ToDo ',data)
 		dispatch({type: ADD_TODO, todo: data, list_id: list_id})
 	}
 	return saveTodo;
